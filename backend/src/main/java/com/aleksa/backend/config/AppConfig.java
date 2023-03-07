@@ -1,5 +1,7 @@
 package com.aleksa.backend.config;
 
+import com.aleksa.backend.mapper.BookMapper;
+import com.aleksa.backend.mapper.WritterMapper;
 import com.aleksa.backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -42,5 +44,25 @@ public class AppConfig implements WebMvcConfigurer {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+    @Bean
+    public BookMapper bookMapper() {
+        return new BookMapper();
+    }
+    @Bean
+    public WritterMapper writterMapper(){
+        return new WritterMapper();
+    }
 
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**")
+                        .allowedMethods("GET", "POST", "PUT", "DELETE")
+                        .allowedOrigins("*")
+                        .allowedHeaders("*");
+            }
+        };
+    }
 }
