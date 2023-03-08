@@ -1,6 +1,6 @@
 import { apiClient } from "./ApiClient";
 
-export const getAllBooks = () =>
+export const getAllBooksApi = () =>
   apiClient.get('/books');
 
 export const createBookApi = (book) =>

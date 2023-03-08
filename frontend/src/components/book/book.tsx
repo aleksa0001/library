@@ -2,15 +2,34 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { createBookApi } from "../api/BookApiClient";
+import { getAllWrittersApi } from "../api/WritterApiClient";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
 
 function Book(props: any) {
+  const columns: GridColDef[] = [
+    { field: "id", headerName: "ID", width: 70, sortable: false },
+    { field: "fullName", headerName: "Full name", width: 300 },
+    { field: "birthday", headerName: "Birthday", width: 130 },
+  ];
   const navigate = useNavigate();
 
+  const [writters, setWritters] = useState([]);
   const [title, setTitle] = useState("");
   const [image, setImage] = useState("");
   const [description, setDesc] = useState("");
   const [genres, setGenres] = useState([]);
   const [dateOfCreation, setDateOfCreation] = useState([]);
+  const [selectedRows, setSelectedRows] = useState([]);
+
+  useEffect(() => refreshBooks(), []);
+
+  function refreshBooks() {
+    getAllWrittersApi()
+      .then((res) => {
+        setWritters(res.data);
+      })
+      .catch((err) => console.log(err));
+  }
 
   const onSubmit = async (values: any) => {
     const book = {
@@ -21,7 +40,6 @@ function Book(props: any) {
       dateOfCreation: values.dateOfCreation,
     };
 
-    console.log(book);
     createBookApi(book)
       .then((response) => {
         console.log(response);
@@ -78,19 +96,45 @@ function Book(props: any) {
               </fieldset>
               <div role="group" aria-labelledby="checkbox-group">
                 <label>
-                  <Field type="checkbox" name="genres" value="COMEDY" />
-                  Comedy
+                  <Field type="checkbox" name="genres" value="ACTION" />
+                  ACTION
                 </label>
                 <label>
-                  <Field type="checkbox" name="genres" value="HORROR" />
-                  Horror
+                  <Field type="checkbox" name="genres" value="ADVENTURE" />
+                  ADVENTURE
+                </label>
+                <label>
+                  <Field type="checkbox" name="genres" value="COMEDY" />
+                  COMEDY
+                </label>
+                <label>
+                  <Field type="checkbox" name="genres" value="THRILLER" />
+                  THRILLER
                 </label>
                 <label>
                   <Field type="checkbox" name="genres" value="DOCUMENTARY" />
-                  Documentary
+                  DOCUMENTARY
+                </label>
+                <label>
+                  <Field type="checkbox" name="genres" value="DRAMA" />
+                  DRAMA
                 </label>
               </div>
-
+              <div style={{ height: 400, width: "100%" }}>
+                <DataGrid
+                  rows={writters}
+                  columns={columns}
+                  checkboxSelection
+                  onRowSelectionModelChange={(ids: any) => {
+                    const selectedIDs = new Set(ids);
+                    const selectedRows = writters.filter((row: any) =>
+                      selectedIDs.has(row.id)
+                    );
+                    console.log(selectedRows);
+                    setSelectedRows(selectedRows);
+                  }}
+                />
+              </div>
               <div className="">
                 <button className="btn btn-success m-5" type="submit">
                   Save

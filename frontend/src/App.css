@@ -2,3 +2,22 @@
   text-align: center;
 }
 
+#image {
+  height: 70%;
+}
+/* .card {
+  cursor: pointer;
+}
+
+.card:hover {
+  background-color: rgba(0, 0, 0, 0.274);
+} */
+ 
+.btn {
+    margin: 15px 0px;
+    float: right;
+}
+
+.main{
+  max-width: 450px;
+}

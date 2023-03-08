@@ -48,31 +48,47 @@ function Login(props: any) {
   });
 
   return (
-    <div className="container">
-      <form onSubmit={formik.handleSubmit}>
+    <div className="mx-auto" style={{ width: "500px", margin: '10%'}}>
+      <div className="card">
+        <h1 className="mx-auto m-2">Login 💻</h1>
+        <form onSubmit={formik.handleSubmit}>
           <h1>{error}</h1>
+          <div className="m-2">
             <Input
               name="email"
               value={formik.values.email}
               onChange={formik.handleChange}
               placeholder="Email"
               type="email"
+              clearOnEscape
             />
+          </div>
+          <div className="m-2">
             <Input
               name="password"
               value={formik.values.password}
               onChange={formik.handleChange}
               placeholder="Password"
               type="password"
+              clearOnEscape
             />
-    
-            <Button  size="large" kind="primary" isLoading={formik.isSubmitting}>
-              Login
-            </Button>
-         
+          </div>
+          <div className="m-2">
+          <Button
+            className=""
+            size="large"
+            kind="primary"
+            isLoading={formik.isSubmitting}
+            style={{ width: "100%" }}
+          >
+            Login
+          </Button>
+
+          </div>
         </form>
-        <div>
-       Don't have account? <Link to="/register">Register</Link>
+        <div className="m-2">
+          Don't have account? <Link to="/register">Register</Link>
+        </div>
       </div>
     </div>
   );
