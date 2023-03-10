@@ -19,9 +19,16 @@ function Header(props: any) {
     navigate("/writter");
   }
 
+  function goHome() {
+    navigate("/");
+  }
+
   return (
     <header className="border-bottom border-light border-5 mb-5 p-2">
       <div className="container">
+        <Button kind="secondary" onClick={goHome}>
+          Aleksandar Hadzic
+        </Button>
         <Button kind="secondary" onClick={addNewBook}>
           Add new book
         </Button>

@@ -94,11 +94,17 @@ function Book(props: any) {
                   name="dateOfCreation"
                 />
               </fieldset>
-              <div role="group" aria-labelledby="checkbox-group">
+              <div className="m-4" role="group" aria-labelledby="checkbox-group">
+                <div className="m-2">
+
                 <label>
                   <Field type="checkbox" name="genres" value="ACTION" />
                   ACTION
                 </label>
+                
+                </div>
+
+
                 <label>
                   <Field type="checkbox" name="genres" value="ADVENTURE" />
                   ADVENTURE

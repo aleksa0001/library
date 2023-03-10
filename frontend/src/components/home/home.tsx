@@ -1,5 +1,6 @@
 import { Button } from "baseui/button";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { getAllBooksApi } from "../api/BookApiClient";
 import { getAllWrittersApi } from "../api/WritterApiClient";
 
@@ -42,7 +43,11 @@ function Home() {
         ))}
       </div>
       <div className="btn">
-        <Button kind="secondary">See all books...</Button>
+        <Button kind="secondary">
+          <Link className="nav-link" to="/all-books">
+            See all books...
+          </Link>
+        </Button>
       </div>
       <h1 className="m-5">Writters</h1>
       <div className="row">

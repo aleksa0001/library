@@ -3,10 +3,10 @@ import { Route, Routes } from "react-router-dom";
 import { Login } from "./components/login/login";
 import { Home } from "./components/home/home";
 import { RequireAuth, useIsAuthenticated } from "react-auth-kit";
-import { Register } from "./components/register/register";
 import { Book } from "./components/book/book";
 import { Writter } from "./components/writter/writter";
 import { Header } from "./components/header/header";
+import { Books } from "./components/books/books";
 
 function App() {
   const isAuthenticated = useIsAuthenticated();
@@ -24,12 +24,19 @@ function App() {
           }
         ></Route>
         <Route path="/login" element={<Login />}></Route>
-        <Route path="/register" element={<Register />}></Route>
         <Route
           path="/book"
           element={
             <RequireAuth loginPath="/login">
               <Book />
+            </RequireAuth>
+          }
+        ></Route>
+        <Route
+          path="/all-books"
+          element={
+            <RequireAuth loginPath="/login">
+              <Books />
             </RequireAuth>
           }
         ></Route>

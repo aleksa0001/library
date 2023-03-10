@@ -42,7 +42,6 @@ function Writter(props: any) {
     console.log(writter);
     createWritterApi(writter)
       .then((response) => {
-        console.log(response);
         navigate("/");
       })
       .catch((error) => console.log(error));
@@ -53,7 +52,7 @@ function Writter(props: any) {
   }
 
   return (
-    <div className="main">
+    <div className="writters">
       <div className="container">
         <h1>Create new writter ✍️</h1>
         <div>
